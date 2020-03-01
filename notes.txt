@@ -1,0 +1,6 @@
+-popis
+-jak funguje
+-icona - grafy
+-nefunguje pokud neni presny format indentu?
+-upravit kod + promenne
+-cross platform - next elease
