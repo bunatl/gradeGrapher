@@ -1,27 +1,21 @@
 # INSIS grade grapher
 
-It is a google chrome extention that allows users to see statistics for given courses from previous semesters. The course is specified by highlighting the course ident anywhere on insis.vse.cz domain.
+Simple google chrome extention that allows the user to view statictics about [University of Economics](https://www.vse.cz/english/) course which ident (course's unique ID) has been highlighted. Once data are fetched and ready to display, extention icon will display green dot. Blue dot indicates that data are being fetched. The extention is working on *\*.inis.vse.cz/\** domain.
 
-## Pictorial description
+## Demo
 ![Image description](./guide.gif)
 
-## Installation
+## Link to google chrome store
+[www](#)
 
-A link to chrome store to be added here.
-
-## notes
--popis
--jak funguje
--icona - grafy
--nefunguje pokud neni presny format indentu?
--upravit kod + promenne
--cross platform - next elease
+## To do
+- Add multi-browser support
 
 ## Author
 Lukas Bunat
 
-## Contributing
+## Contributions
 Any ideas or suggestions are welcomed.
 
 ## License
-None
+MIT

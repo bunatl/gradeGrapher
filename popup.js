@@ -7,14 +7,25 @@ chrome.runtime.sendMessage({ type: "popup" }, (response) => {
     }
 });
 
+
+chrome.tabs.executeScript(null, {
+    code: "console.log(document.getElementById('src1'));"
+});
+chrome.tabs.executeScript(null, {
+    code: "document.getElementById('src1').setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/d3/5.0.0/d3.min.js');"
+});
+chrome.tabs.executeScript(null, {
+    code: "document.getElementById('src2').setAttribute('src', 'https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js');"
+});
+
 /*
- * parse recieved object into data and given semester
- * data are text and has to convert into an array for d3
- * in the function print is called
- * print containt d3 functions to print final graph
- */
+* parse recieved object into data and given semester
+* data are text and has to convert into an array for d3
+* in the function print is called
+* print containt d3 functions to print final graph
+*/
 const showGraph = (data) => {
-    console.log(data);
+
     data = data.replace(/[\r\n]+/gm, "");
     data = data.replace(/\t/g, '');
     data = data.replace(/ /g, '');
