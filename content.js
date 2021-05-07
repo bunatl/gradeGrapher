@@ -85,8 +85,7 @@ const getSelectedText = () => {
 
 //listens to a mouse click and then check any selected text for given pattern
 document.addEventListener("click", async () => {
-    let selectedText = getSelectedText();
-    console.log(selectedText);
+    const selectedText = getSelectedText();
     //define regex expresions to be match in selected text
     //4IT444, global and upper/lower characters
     const re = new RegExp('[0-9][a-z]{2}[0-9]{3}', 'gi');
@@ -96,10 +95,12 @@ document.addEventListener("click", async () => {
     const re3 = new RegExp('[0-9][a-z]{2}', 'gi');
 
     //graph is shown is when no previous process is in progress and matched given regen expression
-    if (selectedText.length > 2 && (re.test(selectedText) || re2.test(selectedText) || re3.test(selectedText))) {
-        chrome.runtime.sendMessage({ type: 'clearIcon' });
-        //removing any white spaces
+    if (re.test(selectedText) || re2.test(selectedText) || re3.test(selectedText)) {
+        // set default extention icon
+        // chrome.runtime.sendMessage({ type: 'clearIcon' });
+        //removing any white spaces in selected text
         const ident = selectedText.replace(/\s/g, '');
+        if (ident.length < 3) return;
         if (ident.length >= 7) return;
         if (lastIdent === ident) return;
         else lastIdent = ident;
