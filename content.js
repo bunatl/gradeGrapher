@@ -1,5 +1,3 @@
-let lastIdent = "";
-
 const getStatsData = async (url) => {
     const res = await fetch(url);
     const html = await res.text();
@@ -12,7 +10,7 @@ const getStatsData = async (url) => {
     return datum[ 0 ];
 };
 
-const fetchAndParse = async (link) => {
+const fetchAndParse = async link => {
     //fetch data and convert them into a text
     const response = await fetch(link);
     const html = await response.text();
@@ -24,14 +22,16 @@ const fetchAndParse = async (link) => {
 
 const repeatTryCatch = async (linkToSpecificCourseStats) => {
     try {
-        return await getStatsData(linkToSpecificCourseStats);
+        const fetchedData = await getStatsData(linkToSpecificCourseStats);
+        if (fetchedData === '' || fetchedData === null || fetchedData === undefined) await repeatTryCatch(linkToSpecificCourseStats);
+        return fetchedData;
     } catch (err) {
         // try again
-        repeatTryCatch(linkToSpecificCourseStats);
+        await repeatTryCatch(linkToSpecificCourseStats);
     }
 };
 
-const showStats = async (ident) => {
+const showStats = async ident => {
     //create an URL to a corresponding faculty
     const facultyURL = `https://insis.vse.cz/auth/student/hodnoceni.pl?fakulta=${ ident.charAt(0) }0;;lang=cz`;
 
@@ -50,6 +50,7 @@ const showStats = async (ident) => {
         const semesterName = await currentRow.firstChild.firstChild.innerText;
         const link = await currentRow.lastChild.getElementsByTagName("a")[ 0 ].href;
 
+        // list of all courses within the givin semester
         const doc2 = await fetchAndParse(link);
         const numOfRows2 = await doc2.getElementById("tmtab_1").rows.length;
 
@@ -61,7 +62,6 @@ const showStats = async (ident) => {
             if (currentIndent === ident) {
                 const linkToSpecificCourseStats = await currentRow2.lastChild.getElementsByTagName("a")[ 0 ].href;
                 const fetchedData = await repeatTryCatch(linkToSpecificCourseStats);
-                if (fetchedData === '' || fetchedData === null || fetchedData === undefined) showStats(ident);
                 return {
                     semesterName,
                     statsData: fetchedData
@@ -83,6 +83,7 @@ const getSelectedText = () => {
     return '';
 };
 
+let lastIdent = "";
 //listens to a mouse click and then check any selected text for given pattern
 document.addEventListener("click", async () => {
     const selectedText = getSelectedText();

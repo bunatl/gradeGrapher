@@ -1,6 +1,6 @@
 {
-    "name": "UoE INSIS Grade Grapher",
-    "version": "2.0",
+    "name": "INIS Grade analyzer",
+    "version": "2.1",
     "manifest_version": 2,
     "permissions": [
         "tabs",

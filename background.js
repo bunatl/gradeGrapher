@@ -11,8 +11,8 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         chrome.browserAction.setIcon({ path: "/icon/icon32.png" });
 
         sendResponse(localBackgroundData);
-    } else if (message.type === 'clearIcon') {
-        chrome.browserAction.setIcon({ path: "/icon/icon32.png" });
+        // } else if (message.type === 'clearIcon') {
+        //     chrome.browserAction.setIcon({ path: "/icon/icon32.png" });
     } else if (message.type === 'fetching') {
         chrome.browserAction.setIcon({ path: "/icon/icon32Dot.png" });
     } else {
